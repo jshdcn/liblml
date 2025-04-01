@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  targetNamespace="http://www.example.org/contactExample"
+  xmlns:tns="http://www.example.org/contactExample"
+  elementFormDefault="qualified">
+
+  <xs:simpleType name="latitude">
+    <xs:restriction base="double">
+      <xs:minInclusive value="-90" />
+      <xs:maxInclusive value="90" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <simpleType name="longitude">
+    <restriction base="double">
+      <minInclusive value="-90" />
+      <maxInclusive value="180" />
+    </restriction>
+  </simpleType>
+
+  <complexType name="person">
+    <sequence>
+      <element name="personGivenName" type="string" />
+      <element name="personFamilyName" type="string" />
+      <element name="personBirthDate" type="date" />
+      <element name="personRole" type="ID" />
+    </sequence>
+  </complexType>
+
+  <complexType name="point">
+    <sequence>
+      <element name="latitude" type="latitude" />
+      <element name="longitude" type="longitude" />
+    </sequence>
+  </complexType>
+
+  <xs:element name="good">
+    <xs:annotation>
+      <xs:documentation>
+        File of good information.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="title" type="xs:string" />
+        <xs:element name="upc" type="ID" />
+        <xs:element name="description" />
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="goodproperty" />
+              <xs:element name="goodtaboo" />
+            </xs:sequence>
+          </xs:complexType>
+        <xs:element name="goodimage" />
+        <xs:element name="goodlink" />
+        <xs:element name="goodfacilities" />
+        <xs:element name="gooddestination" type="point" />
+        <xs:element ref="road" />
+        <xs:element ref="transit" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="transit">
+    <xs:annotation>
+      <xs:documentation>
+        File of transit information.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="title" type="string" />
+        <xs:element name="point" type="point" />
+        <xs:element name="time" type="time" />
+        <xs:element name="person" type="person" />
+        <xs:element name="transitfacilities" type="string" />
+        <xs:element ref="road" />
+        <xs:element ref="good" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="road">
+    <xs:annotation>
+      <xs:documentation>
+        File of road information.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence maxOccurs="unbounded">
+        <xs:element name="person" type="person" />
+        </xs:element>
+        <xs:element ref="good" />
+        <xs:element ref="transit" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>
