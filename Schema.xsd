@@ -11,28 +11,28 @@
     </xs:restriction>
   </xs:simpleType>
 
-  <simpleType name="longitude">
-    <restriction base="double">
-      <minInclusive value="-90" />
-      <maxInclusive value="180" />
-    </restriction>
-  </simpleType>
+  <xs:simpleType name="longitude">
+    <xs:restriction base="double">
+      <xs:minInclusive value="-90" />
+      <xs:maxInclusive value="180" />
+    </xs:restriction>
+  </xs:simpleType>
 
-  <complexType name="person">
-    <sequence>
-      <element name="personGivenName" type="string" />
-      <element name="personFamilyName" type="string" />
-      <element name="personBirthDate" type="date" />
-      <element name="personRole" type="ID" />
-    </sequence>
-  </complexType>
+  <xs:complexType name="person">
+    <xs:sequence>
+      <xs:element name="personGivenName" type="string" />
+      <xs:element name="personFamilyName" type="string" />
+      <xs:element name="personBirthDate" type="date" />
+      <xs:element name="personRole" type="ID" />
+    </xs:sequence>
+  </xs:complexType>
 
-  <complexType name="point">
-    <sequence>
-      <element name="latitude" type="latitude" />
-      <element name="longitude" type="longitude" />
-    </sequence>
-  </complexType>
+  <xs:complexType name="point">
+    <xs:sequence>
+      <xs:element name="latitude" type="latitude" />
+      <xs:element name="longitude" type="longitude" />
+    </xs:sequence>
+  </xs:complexType>
 
   <xs:element name="good">
     <xs:annotation>
